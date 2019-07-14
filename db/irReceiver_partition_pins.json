@@ -1,0 +1,57 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "frame[0]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[1]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[2]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[3]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[4]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[5]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[6]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[7]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[8]",
+					"strict" : false
+				},
+				{
+					"name" : "frame[9]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_50",
+					"strict" : false
+				},
+				{
+					"name" : "irSignal",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

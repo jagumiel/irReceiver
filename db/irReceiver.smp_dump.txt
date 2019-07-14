@@ -1,0 +1,7 @@
+
+State Machine - |irReceiver|ep
+Name ep.finish ep.decoding ep.start ep.idle 
+ep.idle 0 0 0 0 
+ep.start 0 0 1 1 
+ep.decoding 0 1 0 1 
+ep.finish 1 0 0 1 

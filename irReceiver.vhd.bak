@@ -1,0 +1,68 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity irReceiver is
+	Port ( 
+			clk_50	: in	std_logic;												--Reloj del sistema (@50MHz).
+			irSignal	: in	std_logic;												--Senal de entrada (iR).
+			decoded	: out	std_logic_vector (9 downto 0) :="0000000000"	--Senal decodificada.
+  );
+end irReceiver;
+
+architecture Behavioral of irReceiver is
+
+	--Estados
+	TYPE estados is (idle, start, decoding, finish);
+	SIGNAL ep : estados :=idle;	--Estado Presente
+	SIGNAL es : estados;				--Estado Siguiente
+
+
+
+
+
+
+
+begin
+	--Maquina de estados
+	process(ep, irSignal)
+	begin
+		CASE ep IS
+			WHEN idle =>
+				IF(irSignal='0')THEN
+					es<=start;
+				ELSE
+					es<=idle;
+				END IF;
+			--Empieza la cond. de inicio. 2,4ms a '1';
+			WHEN start=>
+				IF(irSignal='0' and contns=110000)THEN --Son 120000, pero quito para no estar n el limite, que hay incertidumbre;
+					es<=e2;
+				ELSE
+					es<=e1;
+				END IF;
+			--Continua la cond. de inicio. 0,4ms a 0;
+                WHEN e2=>
+                    IF(irSignal='0' and contns=20000)THEN
+                        es<=e3;
+		elsif (irSignal='0' and contns=120000)then
+						es<=e0;
+					ELSE
+						es<=e2;
+                    END IF;
+                --Se recibe la trama de datos;
+				WHEN e3 =>
+                    IF(contns=30000 and NB>11)THEN
+                        es<=e4;
+					ELSE
+						es<=e3;
+                    END IF;
+                WHEN e4 =>
+                    es<=e0;
+                WHEN OTHERS =>
+                    es<=e0;
+            END CASE;
+			
+       --end if;
+    end process;
+ep<=es;
