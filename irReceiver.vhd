@@ -25,7 +25,7 @@ architecture Behavioral of irReceiver is
 	
 	--Senales (Contadores)
 	SIGNAL cycleCounter	: integer range 0 to 149999 := 0;	--Contador de ciclos. Cada ciclo equivale a 20ns@50MHz.
-	SIGNAL NB				: integer range 0 to 12 :=0;			--Numero de Bits. Sirve para almacenar el dato en el array.
+	SIGNAL NB				: integer range -1 to 12 :=-1;		--Numero de Bits. Sirve para almacenar el dato en el array.
 	
 	--Senales auxiliares
 	SIGNAL myData	: std_logic_vector (11 downto 0) :="000000000000";	--Vector auxiliar donde se va almacenando la trama que se recibe.
@@ -80,7 +80,7 @@ begin
 			if(ep=idle)then
 				--Contadores a 0.
 				cycleCounter<=0;
-				NB<=0;
+				NB<=-1;
 				--Reinicio de las senales de control.
 				failled<='0';
 				started<='0';
@@ -110,10 +110,12 @@ begin
 					else
 						--Si el led ha estado mas de 1ms emitiendo, es un uno, sino, es un cero.
 						if(stored='0')then
-							if(cyclecounter>50000)then
-								myData(NB)<='1';
-							else
-								myData(NB)<='0';
+							if(NB>-1)then
+								if(cyclecounter>50000)then
+									myData(NB)<='1';
+								else
+									myData(NB)<='0';
+								end if;
 							end if;
 							NB<=NB+1;
 							cycleCounter<=0;
