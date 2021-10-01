@@ -6,3 +6,5 @@
 *.htm linguist-detectable=false
 *.cdf linguist-detectable=false
 *.tcl linguist-detectable=false
+*.sig linguist-detectable=false
+*.sld linguist-detectable=false
