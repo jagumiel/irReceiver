@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Ignoring some languages...
+*.html linguist-detectable=false
+*.htm linguist-detectable=false
+*.cdf linguist-detectable=false
+*.tcl linguist-detectable=false
